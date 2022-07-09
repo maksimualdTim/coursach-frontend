@@ -110,7 +110,7 @@ export default {
       this.checkbox = null
       this.$refs.observer.reset()
     },
-    async register(){
+    async login(){
       const response = await this.$axios.$post('auth/token/login',{
         username: this.name,
         password: this.password,

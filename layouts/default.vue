@@ -64,7 +64,7 @@ export default {
         {
           icon: 'mdi-home',
           title: 'My vacancies',
-          to: '/my-vacancies'
+          to: '/personal'
         },
         {
           icon: 'mdi-calendar-blank-outline',

@@ -40,7 +40,6 @@ export default {
   },
   methods:{
     async fetchVacancies(){
-      console.log(this.$store.state.token)
       const response = await this.$axios.$get('api/v1/my-vacancies/',{headers:{Authorization: `Token ${this.$store.state.token}`}},)
       this.vacancies = response.results
     },
