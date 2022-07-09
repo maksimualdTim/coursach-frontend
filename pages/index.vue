@@ -11,7 +11,7 @@
     <v-row>
       <v-col v-for="vacancy in vacancies" :key="vacancy.id" cols="12" md="2">
         <v-card>
-          <cards-vacancy-card v-bind:vacancy="vacancy"></cards-vacancy-card>
+          <cards-vacancy-card v-bind:vacancy="vacancy" v-bind:categories="categories"></cards-vacancy-card>
         </v-card>
       </v-col>
     </v-row>
@@ -29,20 +29,19 @@ export default {
       categories: [],
       filter: {},
 
-      host: 'http://127.0.0.1:8000/',
     }
   },
   methods:{
     async fetchVacancies(){
-     const response = await this.$axios.$get(`${this.host}api/v1/vacancy/`)
+     const response = await this.$axios.$get('api/v1/vacancy/')
       this.vacancies = response.results
     },
     async fetchCategories(){
-     const response = await this.$axios.$get(`${this.host}api/v1/vacancy/categories`)
+     const response = await this.$axios.$get('api/v1/vacancy/categories/')
       this.categories = response.categories
     },
     async fetchFiltered(filter){
-      const response = await this.$axios.$get(`${this.host}api/v1/filter/?q=${filter.q}&max-bounty=${filter.maxBounty}&min-bounty=${filter.minBounty}`)
+      const response = await this.$axios.$get(`api/v1/filter/?q=${filter.q}&max-bounty=${filter.maxBounty}&min-bounty=${filter.minBounty}`)
       this.vacancies = response.results
     },
     filterAction(filter){

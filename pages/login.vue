@@ -31,18 +31,6 @@
           required
         ></v-text-field>
       </validation-provider>
-      <validation-provider
-        v-slot="{ errors }"
-        name="email"
-        rules="required|email"
-      >
-        <v-text-field
-          v-model="email"
-          :error-messages="errors"
-          label="E-mail"
-          required
-        ></v-text-field>
-      </validation-provider>
       <v-btn
         class="mr-4"
         type="submit"
@@ -112,7 +100,7 @@ export default {
   methods: {
     submit () {
       this.$refs.observer.validate()
-      this.register()
+      this.login()
     },
     clear () {
       this.name = ''
@@ -123,16 +111,11 @@ export default {
       this.$refs.observer.reset()
     },
     async register(){
-      let response = await this.$axios.$post('api/v1/auth/users/',{
+      const response = await this.$axios.$post('auth/token/login',{
         username: this.name,
         password: this.password,
-        email: this.email
       })
 
-      response = await this.$axios.$post('auth/token/login', {
-        username: this.name,
-        password: this.password
-      })
       this.$store.commit('rememberToken', response.auth_token)
     },
   },
